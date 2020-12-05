@@ -19,6 +19,8 @@ abstract class GPIO {
   int getPwmRealRange(int gpio);
   int setPwmFrequency(int gpio, int frequency);
   int getPwmFrequency(int gpio);
+  int servo(int gpio, int pulseWidth);
+  int getServoPulseWidth(int gpio);
 }
 
 class _GPIOImpl implements GPIO {
@@ -45,47 +47,47 @@ class _GPIOImpl implements GPIO {
   }
 
   @override
-  int read(int gpio) {
+  int read(gpio) {
     return dylib.gpioRead(gpio);
   }
 
   @override
-  int write(int gpio, int level) {
+  int write(gpio, level) {
     return dylib.gpioWrite(gpio, level);
   }
 
   @override
-  int getPwmDutyCycle(int gpio) {
+  int getPwmDutyCycle(gpio) {
     return dylib.gpioGetPWMdutycycle(gpio);
   }
 
   @override
-  int pwm(int gpio, int dutyCycle) {
+  int pwm(gpio, dutyCycle) {
     return dylib.gpioPWM(gpio, dutyCycle);
   }
 
   @override
-  int setPwmRange(int gpio, int range) {
+  int setPwmRange(gpio, range) {
     return dylib.gpioSetPWMrange(gpio, range);
   }
 
   @override
-  int getPwmFrequency(int gpio) {
+  int getPwmFrequency(gpio) {
     return dylib.gpioGetPWMfrequency(gpio);
   }
 
   @override
-  int getPwmRange(int gpio) {
+  int getPwmRange(gpio) {
     return dylib.gpioGetPWMrange(gpio);
   }
 
   @override
-  int getPwmRealRange(int gpio) {
+  int getPwmRealRange(gpio) {
     return dylib.gpioGetPWMrealRange(gpio);
   }
 
   @override
-  int setPwmFrequency(int gpio, int frequency) {
+  int setPwmFrequency(gpio, frequency) {
     return dylib.gpioSetPWMfrequency(gpio, frequency);
   }
 }

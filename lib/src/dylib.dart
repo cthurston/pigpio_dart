@@ -32,7 +32,7 @@ class LibraryLoader {
       defaultValue: Platform.environment['PIGPIO_PATH'] ?? '',
     );
     if (isFile(path)) return path;
-    return fixupPath(path) + 'pigpio.so';
+    return fixupPath(path) + 'libpigpio.so';
   }
 
   static ffi.DynamicLibrary load() => ffi.DynamicLibrary.open(resolvePath());

@@ -45,3 +45,13 @@ reader.stream.listen((data) {
 ```
 
 To use this package, add `pigpio_dart` as a [dependency in your pubspec.yaml file](https://dart.dev/tools/pub/dependencies).
+
+
+# Running
+The pigpio lib requires root to run. Therefore to use this in a dart script it is best to compile and give that executable root permission.
+
+```shell
+dart compile exe my_program.dart
+sudo chown root:root my_program.exe
+sudo chmod 7455 my_program.exe
+```

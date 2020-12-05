@@ -1,7 +1,7 @@
 name: pigpio_dart
 description: GPIO for raspberry pi.
 version: 1.0.0
-repository: https://github.com/jpnurmi/pigpio_dart
+repository: https://github.com/cthurston/pigpio_dart
 
 environment:
   sdk: '>=2.9.0 <3.0.0'
@@ -10,7 +10,7 @@ dependencies:
   ffi:
 
 dev_dependencies:
-  ffigen:
+  ffigen: 1.2.0
   pedantic: ^1.9.2
   test: 
 
@@ -20,5 +20,6 @@ ffigen:
     libpigpio: GPIO for Raspberry Pi
   output: 'lib/src/bindings.dart'
   headers:
-    - 'lib/pigpio.h'
+    entry-points:
+      - 'lib/pigpio.h'
   

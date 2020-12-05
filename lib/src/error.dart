@@ -10,3 +10,4 @@ class SerialPortError extends OSError {
     return super.toString().replaceFirst('OS Error', runtimeType.toString());
   }
 }
+
