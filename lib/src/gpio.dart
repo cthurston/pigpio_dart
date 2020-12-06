@@ -8,10 +8,13 @@ abstract class GPIO {
 
   int initialize();
   void terminate();
+  // Basic
   int setMode(int gpio, int mode);
   int getMode(int gpio);
   int read(int gpio);
   int write(int gpio, int level);
+  int setPullUpDown(int gpio, int pud);
+  // PWM
   int pwm(int gpio, int dutyCycle);
   int getPwmDutyCycle(int gpio);
   int setPwmRange(int gpio, int range);
@@ -19,6 +22,7 @@ abstract class GPIO {
   int getPwmRealRange(int gpio);
   int setPwmFrequency(int gpio, int frequency);
   int getPwmFrequency(int gpio);
+  // Servo
   int servo(int gpio, int pulseWidth);
   int getServoPulseWidth(int gpio);
 }
@@ -57,6 +61,11 @@ class _GPIOImpl implements GPIO {
   }
 
   @override
+  int setPullUpDown(gpio, pud) {
+    return dylib.gpioSetPullUpDown(gpio, pud);
+  }
+
+  @override
   int getPwmDutyCycle(gpio) {
     return dylib.gpioGetPWMdutycycle(gpio);
   }
@@ -89,5 +98,15 @@ class _GPIOImpl implements GPIO {
   @override
   int setPwmFrequency(gpio, frequency) {
     return dylib.gpioSetPWMfrequency(gpio, frequency);
+  }
+
+  @override
+  int getServoPulseWidth(gpio) {
+    return dylib.gpioGetServoPulsewidth(gpio);
+  }
+
+  @override
+  int servo(gpio, pulseWidth) {
+    return dylib.gpioServo(gpio, pulseWidth);
   }
 }
