@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:pigpio_dart/src/bindings.dart';
 
-LibPiGpio _dylib;
+LibPiGpio? _dylib;
 LibPiGpio get dylib => _dylib ?? LibPiGpio(LibraryLoader.load());
 
 extension StringWith on String {
