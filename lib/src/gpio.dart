@@ -1,6 +1,7 @@
+import 'dart:ffi' as ffi;
 import 'package:pigpio_dart/src/dylib.dart';
-
-import 'dylib.dart';
+import 'package:pigpio_dart/src/util.dart';
+import 'package:ffi/ffi.dart' as ffi;
 
 /// PiGpio.
 abstract class GPIO {
@@ -25,6 +26,14 @@ abstract class GPIO {
   // Servo
   int servo(int gpio, int pulseWidth);
   int getServoPulseWidth(int gpio);
+  // Serial
+  int serOpen(String sertty, int baud);
+  int serClose(int handle);
+  int serWriteByte(int handle, int bVal);
+  int serReadByte(int handle);
+  int serWrite(int handle, String str, int count);
+  String serRead(int handle, int count);
+  int serDataAvailable(int handle);
 }
 
 class _GPIOImpl implements GPIO {
@@ -108,5 +117,47 @@ class _GPIOImpl implements GPIO {
   @override
   int servo(gpio, pulseWidth) {
     return dylib.gpioServo(gpio, pulseWidth);
+  }
+
+  @override
+  int serOpen(String sertty, int baud) {
+    var sp = Util.toUtf8(sertty);
+    var flags = 0; // This is not implemented in the lib yet.
+    return dylib.serOpen(sp, baud, flags);
+  }
+
+  @override
+  int serClose(int handle) {
+    return dylib.serClose(handle);
+  }
+
+  @override
+  String serRead(int handle, int count) {
+    var ptr = ffi.allocate<ffi.Int8>(count: count);
+    dylib.serRead(handle, ptr, count);
+    var res = Util.fromUtf8(ptr);
+    ffi.free(ptr);
+    return res;
+  }
+
+  @override
+  int serReadByte(int handle) {
+    return dylib.serReadByte(handle);
+  }
+
+  @override
+  int serWrite(int handle, String str, int count) {
+    var buf = Util.toUtf8(str);
+    return dylib.serWrite(handle, buf, count);
+  }
+
+  @override
+  int serWriteByte(int handle, int bVal) {
+    return dylib.serWriteByte(handle, bVal);
+  }
+
+  @override
+  int serDataAvailable(int handle) {
+    return dylib.serDataAvailable(handle);
   }
 }

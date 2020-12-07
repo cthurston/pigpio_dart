@@ -18,7 +18,7 @@ ffigen:
   name: LibPiGpio
   description: >-
     libpigpio: GPIO for Raspberry Pi
-  output: 'lib/src/bindings.dart'
+  output: 'lib/src/bindings_mac.dart'
   headers:
     entry-points:
       - 'lib/pigpio.h'
