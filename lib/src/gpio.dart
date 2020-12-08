@@ -26,6 +26,12 @@ abstract class GPIO {
   // Servo
   int servo(int gpio, int pulseWidth);
   int getServoPulseWidth(int gpio);
+  // SPI
+  int spiOpen(int spiChan, int baud, int spiFlags);
+  int spiClose(int handle);
+  String spiRead(int handle, int count);
+  int spiWrite(int handle, String buf, int count);
+  String spiXfer(int handle, String txBuf, int count);
   // Serial
   int serOpen(String sertty, int baud);
   int serClose(int handle);
@@ -159,5 +165,40 @@ class _GPIOImpl implements GPIO {
   @override
   int serDataAvailable(int handle) {
     return dylib.serDataAvailable(handle);
+  }
+
+  @override
+  int spiClose(int handle) {
+    return dylib.spiClose(handle);
+  }
+
+  @override
+  int spiOpen(int spiChan, int baud, int spiFlags) {
+    return dylib.spiOpen(spiChan, baud, spiFlags);
+  }
+
+  @override
+  String spiRead(int handle, int count) {
+    var ptr = ffi.allocate<ffi.Int8>(count: count);
+    dylib.serRead(handle, ptr, count);
+    var res = Util.fromUtf8(ptr);
+    ffi.free(ptr);
+    return res;
+  }
+
+  @override
+  int spiWrite(int handle, String str, int count) {
+    var buf = Util.toUtf8(str);
+    return dylib.spiWrite(handle, buf, count);
+  }
+
+  @override
+  String spiXfer(int handle, String str, int count) {
+    var txBuf = Util.toUtf8(str);
+    var rxBuf = ffi.allocate<ffi.Int8>(count: count);
+    dylib.spiXfer(handle, txBuf, rxBuf, count);
+    var res = Util.fromUtf8(rxBuf);
+    ffi.free(rxBuf);
+    return res;
   }
 }
