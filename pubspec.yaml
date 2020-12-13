@@ -1,5 +1,5 @@
-name: pigpio_dart
-description: GPIO for raspberry pi.
+name: pigpio
+description: GPIO for raspberry pi using pigpio library (//abyz.me.uk/rpi/pigpio/).
 version: 1.0.0
 repository: https://github.com/cthurston/pigpio_dart
 
@@ -18,8 +18,8 @@ ffigen:
   name: LibPiGpio
   description: >-
     libpigpio: GPIO for Raspberry Pi
-  output: 'lib/src/bindings_mac.dart'
+  output: 'lib/src/bindings.dart'
   headers:
     entry-points:
-      - 'lib/pigpio.h'
+      - 'ffi/pigpio.h'
   
