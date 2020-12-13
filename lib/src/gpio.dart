@@ -1,6 +1,6 @@
 import 'dart:ffi' as ffi;
-import 'package:pigpio_dart/src/dylib.dart';
-import 'package:pigpio_dart/src/util.dart';
+import 'package:pigpio/src/dylib.dart';
+import 'package:pigpio/src/util.dart';
 import 'package:ffi/ffi.dart' as ffi;
 
 /// PiGpio.

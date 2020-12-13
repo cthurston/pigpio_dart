@@ -1,7 +1,7 @@
 import 'dart:ffi' as ffi;
 import 'dart:io';
 
-import 'package:pigpio_dart/src/bindings.dart';
+import 'package:pigpio/src/bindings.dart';
 
 LibPiGpio? _dylib;
 LibPiGpio get dylib => _dylib ?? LibPiGpio(LibraryLoader.load());

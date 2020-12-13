@@ -27,7 +27,7 @@ that utilizes Flutter's build system to build and deploy `libserialport` on all 
 ## Usage
 
 ```dart
-import 'package:pigpio_dart/pigpio_dart.dart';
+import 'package:pigpio/pigpio_dart.dart';
 
 final name = SerialPort.availablePorts.first;
 final port = SerialPort(name);

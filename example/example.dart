@@ -1,4 +1,4 @@
-// import 'package:pigpio_dart/pigpio_dart.dart';
+// import 'package:pigpio/pigpio_dart.dart';
 
 void main() {
   // print('Available ports:');
